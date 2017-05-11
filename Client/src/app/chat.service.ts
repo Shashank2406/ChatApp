@@ -14,7 +14,7 @@ export class ChatService {
   }
   getMessages() {
     let observable = new Observable(observer => {
-      this.socket = io('http://localhost:3000');
+      this.socket = io('http://192.168.15.27:3000');
       this.socket.on('message', (data) => {
         observer.next(data);    
       });
