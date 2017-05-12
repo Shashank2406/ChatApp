@@ -9,12 +9,12 @@ export class ChatService {
   constructor() { }
   public socket;
   
-  sendMessage(message){
-    this.socket.emit('add-message', message);    
+  sendMessage(message,name){
+    this.socket.emit('add-message', message,name);    
   }
   getMessages() {
     let observable = new Observable(observer => {
-      this.socket = io('http://192.168.15.27:3000');
+      this.socket = io('http://192.168.15.27:3002');
       this.socket.on('message', (data) => {
         observer.next(data);    
       });

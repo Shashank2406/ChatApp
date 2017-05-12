@@ -9,6 +9,7 @@ import { FormComponent } from './form/form.component';
 import { RouterModule,Routes } from '@angular/router';
 import { ChatboxComponent } from './chatbox/chatbox.component';
 import { ChatService } from './chat.service';
+import { PassService } from './pass.service';
 
 
 const rou: Routes=[
@@ -28,7 +29,7 @@ const rou: Routes=[
     HttpModule,
     RouterModule.forRoot(rou)
   ],
-  providers: [ConnectorService,CanActivateViaAuthGuard,ChatService],
+  providers: [ConnectorService,CanActivateViaAuthGuard,ChatService,PassService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
