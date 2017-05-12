@@ -17,33 +17,33 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     $(document).ready(function()
-{
-  $('#load-more-content').click(function()
-  {
+    {
+      $('#load-more-content').click(function()
+      {
     
-    $('#more-content').toggleClass('shown');
+        $('#more-content').toggleClass('shown');
 
-    $('#load-more-content').hide();
+        $('#load-more-content').hide();
 
-    if( $('#more-content').hasClass('shown') )
-    {
-      $('#load-more-content').text('Go Back');
-      $('#more-content').fadeIn('slow', function()
-      {
-        $('#load-more-content').fadeIn('slow');
-      });
-    }
-    else
-    {
-      $('#load-more-content').text('Load some content');
-      $('#more-content').fadeOut('slow', function()
-      {
-        $('#load-more-content').fadeIn('slow');
-      });
-    }
+        if( $('#more-content').hasClass('shown') )
+        {
+          $('#load-more-content').text('Go Back');
+          $('#more-content').fadeIn('slow', function()
+          {
+            $('#load-more-content').fadeIn('slow');
+          });
+        }
+        else
+        {
+          $('#load-more-content').text('Click Here to Proceed');
+          $('#more-content').fadeOut('slow', function()
+          {
+            $('#load-more-content').fadeIn('slow');
+          });
+        }
+    });
   });
-});
-  }
+}
    
    check(form1)
   {

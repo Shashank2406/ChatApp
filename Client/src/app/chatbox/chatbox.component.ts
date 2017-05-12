@@ -24,23 +24,23 @@ export class ChatboxComponent implements OnInit {
     this.name=this.getter.get();
     (function() {
 
-	$('#live-chat header').on('click', function() {
+	    $('#live-chat header').on('click', function() {
 
-		$('.chat').slideToggle(300, 'swing');
-		$('.chat-message-counter').fadeToggle(300, 'swing');
+		  $('.chat').slideToggle(300, 'swing');
+		  $('.chat-message-counter').fadeToggle(300, 'swing');
 
-	});
+	    });
 
-	$('.chat-close').on('click', function(e) {
+	    $('.chat-close').on('click', function(e) {
 
-		e.preventDefault();
-		$('#live-chat').fadeOut(300);
-    window.location.replace("http://192.168.15.27:4200");
+		    e.preventDefault();
+		    $('#live-chat').fadeOut(300);
+        window.location.replace("http://192.168.15.27:4200");
 
-	});
+	    });
 
-}) ();
-  }
+    }) ();
+}
   sendMessage(){
    
     console.log("sendMessage");
