@@ -1,0 +1,61 @@
+<!--<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>
+				KelltonTech <small>Peer to Peer Chatting</small>
+				</h1>
+			</div>
+<form #form1="ngForm" (ngSubmit)="check(form1)">
+  <label>Name</label>
+  <input type="text" name="name" [(ngModel)]="user" #name="ngModel" placeholder="Enter your Name" >
+  <label>Email</label>
+  <input type="email" name="email" [(ngModel)]="pass" #email="ngModel" placeholder="Enter your Email" >
+  <label>Phone Number</label>
+  <input type="number" name="number" [(ngModel)]="num" #number="ngModel" placeholder="Enter your No" >
+  <button type="submit" class="btn btn-primary">
+  <span></span>Chat
+  </button>
+</form> -->
+
+ <body>
+  <nav class="navbar" id="top">
+    <div class="inner">
+      <a>Welcome!</a>
+    </div>
+  </nav>
+  <header class="container">
+    <section class="content">
+      <h1>KelltonTech Solutions Limited</h1>
+      <p class="sub-title"><strong>Peer to Peer Chat</strong>
+      <p><a class="button" id="load-more-content" href="#top">Click Here to Proceed</a></p>
+      
+      <!-- Some content to demonstrate viewport scrolling behavior -->
+      <div id="more-content">
+        <!--<blockquote>
+        Creating a goal-driven statement of what a product or application does results in better product experiences.
+        It meets expectations because it is focused on solving the problem it was created to address.
+        There is power in doing one thing and it doing it very well.
+        <cite>
+          Francisco Inchauste
+          From <a href="http://sixrevisions.com/usabilityaccessibility/creating-a-timeless-user-experience/" target="_blank">Creating a Timeless User Experience</a>
+        </cite>
+        </blockquote>-->
+		<blockquote>
+			<form #form1="ngForm" (ngSubmit)="check(form1)">
+  			<label>Name</label>
+  			<input type="text" name="name" [(ngModel)]="user" #name="ngModel" placeholder="Enter your Name" >
+  			<div><label>Email</label>
+  			<input type="email" name="email" [(ngModel)]="pass" #email="ngModel" placeholder="Enter your Email" >
+  			</div>
+			<div><label>Num</label>
+  			<input type="number" name="number" [(ngModel)]="num" #number="ngModel" placeholder="Enter your Number" >
+			</div>
+			<button type="submit" class="btn btn-primary">
+  			<span></span>Chat
+  			</button>
+			</form> 
+		</blockquote>	
+      </div>
+    </section>
+  </header>
