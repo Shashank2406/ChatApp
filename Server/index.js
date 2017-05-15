@@ -8,16 +8,6 @@ var mongo = require('mongodb').MongoClient;
 
 var port = process.env.PORT || 3002;
 
-// Connect to the MongoDB
-mongoose.connect('mongodb://localhost:27017/chatapp');
-
-
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(bodyParser.json());
-
-routes = require('./routes/index')
-app.use('/api', routes);
 
 var roomno = 1;
 io.on('connection', (socket) => {
@@ -41,13 +31,23 @@ if(roomno<2)
     io.sockets.in("room-"+roomno).emit('message', {type:'new-message', text: message, user: name,time1: time});
     console.log(message)
     //console.log(socket.username+"Socket")
-//     mongo.connect('mongodb://localhost:27017/chatapp', function (err, db) {
-//     var collection = db.collection('chat messages');
-//     collection.insert({ content: message }, function(err, o) {
-//         if (err) { console.warn(err.message); }
-//         else { console.log("chat message inserted into db: " + message); }
-//     });
+      // Connect to the MongoDB
+    // var ID_gen=345;
+    // if(name!='Admin')
+    // {
+    //   name_sender=name;
+    // }
+    mongo.connect('mongodb://localhost:27017/chatapp', function (err, db) {
+    var collection = db.collection(name);
+    collection.insert({ content: message, User: name , stamp: time, ID: ID_gen}, function(err, o) {
+        if (err) { console.warn(err.message); }
+        else { console.log("chat message inserted into db: " + message); }
+    });
+//     console.log(name_sender);
+//     db.collection(name_sender).find().populate('Admin').exec(function(err, documents){
+//     // you will get drinks object in response 
 // });
+  });
   });
 }
 else
