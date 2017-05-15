@@ -10,8 +10,9 @@ import { RouterModule,Routes } from '@angular/router';
 import { ChatboxComponent } from './chatbox/chatbox.component';
 import { ChatService } from './chat.service';
 import { PassService } from './pass.service';
+import { Configuration} from './config'
 
-
+//Routes
 const rou: Routes=[
 {path:'' ,component:FormComponent},
 {path:'chatbox',component:ChatboxComponent,canActivate: [CanActivateViaAuthGuard]}
@@ -29,7 +30,7 @@ const rou: Routes=[
     HttpModule,
     RouterModule.forRoot(rou)
   ],
-  providers: [ConnectorService,CanActivateViaAuthGuard,ChatService,PassService],
+  providers: [ConnectorService,CanActivateViaAuthGuard,ChatService,PassService,Configuration],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

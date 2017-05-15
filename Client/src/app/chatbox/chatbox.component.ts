@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../chat.service';
 import { PassService } from '../pass.service';
-import { Router} from '@angular/router';
+import { Configuration } from '../config';
 declare var $:any;
 
 @Component({
@@ -14,7 +14,7 @@ export class ChatboxComponent implements OnInit {
   connection;
   message;
   name="Default";
-  constructor(public chatService:ChatService,public getter:PassService,public router1:Router) { }
+  constructor(public chatService:ChatService,public getter:PassService,public con: Configuration) { }
 
   ngOnInit() {
     this.connection = this.chatService.getMessages().subscribe(message => {
@@ -22,6 +22,7 @@ export class ChatboxComponent implements OnInit {
       console.log(message)
     })
     this.name=this.getter.get();
+    var URL= this.con.UrlObj.HomeURL;
     (function() {
 
 	    $('#live-chat header').on('click', function() {
@@ -35,7 +36,7 @@ export class ChatboxComponent implements OnInit {
 
 		    e.preventDefault();
 		    $('#live-chat').fadeOut(300);
-        window.location.replace("http://192.168.15.27:4200");
+        window.location.replace(URL);
 
 	    });
 

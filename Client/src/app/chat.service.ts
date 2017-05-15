@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
+import { Configuration } from './config';
 
 
 @Injectable()
 export class ChatService {
-  constructor() { }
+  constructor(public con: Configuration) { }
   public socket;
   
   sendMessage(message,name){
@@ -14,7 +15,7 @@ export class ChatService {
   }
   getMessages() {
     let observable = new Observable(observer => {
-      this.socket = io('http://192.168.15.27:3002');
+      this.socket = io(this.con.UrlObj.NodeURL);
       this.socket.on('message', (data) => {
         observer.next(data);    
       });

@@ -12,7 +12,7 @@ declare var $:any;
 export class FormComponent implements OnInit {
   name:string;
   email:string;
-  num:string;
+  num:number;
   constructor(public send:ConnectorService,public setter:PassService) { }
 
   ngOnInit() {
@@ -45,16 +45,12 @@ export class FormComponent implements OnInit {
   });
 }
    
-   check(form1)
+check(form1)
   {
     console.log(form1.value.name);
     console.log(form1.value.email);
-    this.send.set(form1.value.name,form1.value.email)
-    this.send.PostMongo(form1).subscribe(data => {return true;}
-
-          ,errorr=>{console.log(errorr)}
-
-    );
+    console.log(form1.value.number);
+    this.send.set(form1.value.name,form1.value.email,form1.value.number)
     this.setter.set(form1.value.name)
     {
       console.log("Value sent");  

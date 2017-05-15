@@ -7,21 +7,16 @@ import 'rxjs/RX';
 
 @Injectable()
 export class ConnectorService {
-  users:string;
-  pas:string;
-  Url:'http://192.168.15.156:3000/api/newuser'
+  static name1:string;
+  static email:string;
+  static num:number;
   constructor(public GitHttp : Http,public router1:Router) { }
-   set(user,pass)
+  set(name_set,email_set,number_set)
   {
-    this.users=user;
-    this.pas=pass;
+    ConnectorService.name1=name_set;
+    ConnectorService.email=email_set;
+    ConnectorService.num=number_set;
     this.router1.navigate(['/chatbox']);
-  }
-  PostMongo(form){
-  let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({ headers: headers });
-    console.log(form.value);
-    return this.GitHttp.post('http://192.168.15.156:3000/api/newuser', form.value, headers).map((res: Response) => res.json());
   }
 }
 
@@ -29,9 +24,17 @@ export class ConnectorService {
 export class CanActivateViaAuthGuard implements CanActivate {
 
   constructor() {}
-  canActivate() {
-    // console.log();
-   
+  canActivate() { 
+    if(ConnectorService.name1&&ConnectorService.email&&ConnectorService.num)
+    {
+      console.log("true");
       return true;
+    }
+    else
+    {
+      console.log("false"+ConnectorService.name1+ConnectorService.email+ConnectorService.num);
+      
+      return false;
+    }  
   }
 }
