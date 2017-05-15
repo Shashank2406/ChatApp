@@ -4,11 +4,13 @@ var io = require('socket.io')(http);
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var mongo = require('mongodb').MongoClient;
+var LocalStorage = require('node-localstorage').LocalStorage;
+
 
 
 var port = process.env.PORT || 3002;
 
-
+var first_obj=[];
 var roomno = 1;
 io.on('connection', (socket) => {
   console.log('user connected');
@@ -24,30 +26,43 @@ io.on('connection', (socket) => {
   });
 if(roomno<2)
 {
-  socket.on('add-message', (message,name) => {
+    SECOND="";
+    name='default';
+    localStorage = new LocalStorage('./scratch');
+    localStorage.setItem('FIRST',name);
+    socket.on('add-message', (message,name) => {
     time= new Date()
     time = time.getHours()+":"+time.getMinutes()
-    console.log(time)
     io.sockets.in("room-"+roomno).emit('message', {type:'new-message', text: message, user: name,time1: time});
-    console.log(message)
+    //Under Construction
+    if(localStorage.getItem('FIRST')==='default')
+    {
+       localStorage.setItem('FIRST',name);
+       console.log(first_obj)
+       local=localStorage.getItem('FIRST')
+    }
+    if(!(name===local))
+    {
+      SECOND=name;
+      //console.log(first_obj);
+    }
+    else
+    {
+      first_obj.push(message);
+    }
     //console.log(socket.username+"Socket")
-      // Connect to the MongoDB
-    // var ID_gen=345;
-    // if(name!='Admin')
-    // {
-    //   name_sender=name;
-    // }
-    mongo.connect('mongodb://localhost:27017/chatapp', function (err, db) {
-    var collection = db.collection(name);
-    collection.insert({ content: message, User: name , stamp: time, ID: ID_gen}, function(err, o) {
-        if (err) { console.warn(err.message); }
-        else { console.log("chat message inserted into db: " + message); }
-    });
-//     console.log(name_sender);
-//     db.collection(name_sender).find().populate('Admin').exec(function(err, documents){
-//     // you will get drinks object in response 
-// });
-  });
+    // Connect to the MongoDB
+    if(SECOND!='')
+    {
+      console.log(local+SECOND)
+      mongo.connect('mongodb://localhost:27017/chatapp', function (err, db) {
+      var collection = db.collection('message');
+      collection.insert({ content: message, User: name , stamp: time}, function(err, o) {
+          if (err) { console.warn(err.message); }
+            else { console.log("chat message inserted into db: " + message); }
+        });
+      });
+    }
   });
 }
 else

@@ -11,22 +11,10 @@ import { ChatboxComponent } from './chatbox/chatbox.component';
 import { ChatService } from './chat.service';
 import { PassService } from './pass.service';
 import { Configuration} from './config'
-import { rou } from './route'
 
- 
-@NgModule({
-  declarations: [
-    AppComponent,
-    FormComponent,
-    ChatboxComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    RouterModule.forRoot(rou)
-  ],
-  providers: [ConnectorService,CanActivateViaAuthGuard,ChatService,PassService,Configuration],
-  bootstrap: [AppComponent]
-})
-export class AppModule {}
+
+export const rou: Routes=[
+    {path:'' ,component:FormComponent},
+    {path:'chatbox',component:ChatboxComponent,canActivate: [CanActivateViaAuthGuard]}
+
+];
