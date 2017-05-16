@@ -22,9 +22,8 @@
           <hr>
           </div>
           
-	</div> <!-- end chat-message -->			
-<input type="text" [(ngModel)]="message" type="text" placeholder="Type your message…" autofocus>
+	</div> <!-- end chat-message -->	
+
+<input id="message" minlength="1" type="text" [(ngModel)]="message" type="text" placeholder="Type your message…" autofocus>
 <button type="submit" class="message-submit" (click)="sendMessage()">Send</button>
 
-
-	

@@ -25,7 +25,17 @@ export class ChatboxComponent implements OnInit {
     var URL= this.con.UrlObj.HomeURL;
     (function() {
 
-	    $('#live-chat header').on('click', function() {
+	    $(document).ready(function(){
+      $('.message-submit').prop('disabled',true);
+      $('#message').keyup(function(){
+        $('.message-submit').prop('disabled', this.value == "" ? true : false);     
+        })
+      });  
+      
+      
+      
+      
+      $('#live-chat header').on('click', function() {
 
 		  $('.chat').slideToggle(300, 'swing');
 		  $('.chat-message-counter').fadeToggle(300, 'swing');
@@ -37,10 +47,10 @@ export class ChatboxComponent implements OnInit {
 		    e.preventDefault();
 		    $('#live-chat').fadeOut(300);
         window.location.replace(URL);
-        this.chatService.sendMessage('end','end');
 	    });
 
     }) ();
+
 }
   sendMessage(){
     console.log("sendMessage");

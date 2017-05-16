@@ -7,7 +7,7 @@ export class Configuration {
 
     //URL
     public UrlObj = {
-        NodeURL: 'http://192.168.15.27:3002',
+        NodeURL: 'http://192.168.15.27:3000',
         HomeURL: 'http://192.168.15.27:4200'
     };
    
