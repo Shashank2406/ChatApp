@@ -58,6 +58,7 @@ if(roomno<2)
       mongo.connect('mongodb://localhost:27017/chatapp', function (err, db) {
       var collection = db.collection(clname);
       first_obj.forEach((item) => collection.insert(item));
+      first_obj=[];
       });
     }
   });
@@ -65,7 +66,7 @@ if(roomno<2)
 else
   {
     console.log("room not available");
-    io.sockets.in("room-"+roomno).emit('message', {type:'new-message', text: 'room not available', user: 'Admin',time1: time});
+    io.sockets.in("room-"+roomno).emit('message', {type:'new-message', text: 'room not available please try after sometime', user: 'Admin',time1: 'Now'});
   }
 
 });
