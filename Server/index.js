@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var mongo = require('mongodb').MongoClient;
 var LocalStorage = require('node-localstorage').LocalStorage;
+var Promise = require("bluebird");
 
 
 
@@ -17,7 +18,6 @@ io.on('connection', (socket) => {
   if(io.nsps['/'].adapter.rooms["room-"+roomno] && io.nsps['/'].adapter.rooms["room-"+roomno].length > 1)
     roomno++;
   socket.join("room-"+roomno);
-
   //Send this event to everyone in the room.
   //io.sockets.in("room-"+roomno).emit('connectToRoom', "You are in room no. "+roomno);
   console.log("room"+roomno);
@@ -60,6 +60,7 @@ if(roomno<2)
       //     if (err) { console.warn(err.message); }
       //       else { console.log("chat message inserted into db: " + message); }
       //   });
+      
       });
     }
   });
@@ -67,6 +68,7 @@ if(roomno<2)
 else
   {
     console.log("room not available");
+    io.sockets.in("room-"+roomno).emit('message', {type:'new-message', text: 'room not available', user: 'Admin',time1: time});
   }
 
 });
