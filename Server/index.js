@@ -9,7 +9,7 @@ var Promise = require("bluebird");
 
 
 
-var port = process.env.PORT || 3002;
+var port = process.env.PORT || 3000;
 
 var first_obj=[];
 var roomno = 1;
@@ -27,6 +27,7 @@ io.on('connection', (socket) => {
 if(roomno<2)
 {
     SECOND="";
+    flag=0;
     name='default';
     localStorage = new LocalStorage('./scratch');
     localStorage.setItem('FIRST',name);
@@ -39,7 +40,7 @@ if(roomno<2)
     if(localStorage.getItem('FIRST')==='default')
     {
        localStorage.setItem('FIRST',name);
-       console.log(first_obj)
+       //console.log(first_obj)
        local=localStorage.getItem('FIRST')
     }
     if(!(name===local))
@@ -47,20 +48,16 @@ if(roomno<2)
       SECOND=name;
       //console.log(first_obj);
       clname=local+SECOND;
+      flag=1;
     }
     //console.log(socket.username+"Socket")
     // Connect to the MongoDB
     console.log(clname);
-    if(SECOND!='')
+    if(SECOND!=''&&flag==1)
     {
       mongo.connect('mongodb://localhost:27017/chatapp', function (err, db) {
       var collection = db.collection(clname);
       first_obj.forEach((item) => collection.insert(item));
-      // collection.insert({ content: first_obj[0].data, User: first_obj[0].User , stamp: first_obj[0].date}, function(err, o) {
-      //     if (err) { console.warn(err.message); }
-      //       else { console.log("chat message inserted into db: " + message); }
-      //   });
-      
       });
     }
   });
