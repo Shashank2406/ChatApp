@@ -37,13 +37,12 @@ export class ChatboxComponent implements OnInit {
 		    e.preventDefault();
 		    $('#live-chat').fadeOut(300);
         window.location.replace(URL);
-
+        this.chatService.sendMessage('end','end');
 	    });
 
     }) ();
 }
   sendMessage(){
-   
     console.log("sendMessage");
     console.log(this.message);
     this.chatService.sendMessage(this.message,this.name);

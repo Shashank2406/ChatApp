@@ -30,11 +30,12 @@ if(roomno<2)
     name='default';
     localStorage = new LocalStorage('./scratch');
     localStorage.setItem('FIRST',name);
+    clname='';
     socket.on('add-message', (message,name) => {
     time= new Date()
     time = time.getHours()+":"+time.getMinutes()
     io.sockets.in("room-"+roomno).emit('message', {type:'new-message', text: message, user: name,time1: time});
-    //Under Construction
+    first_obj.push({data : message,date: time,User:name});
     if(localStorage.getItem('FIRST')==='default')
     {
        localStorage.setItem('FIRST',name);
@@ -45,22 +46,20 @@ if(roomno<2)
     {
       SECOND=name;
       //console.log(first_obj);
-    }
-    else
-    {
-      first_obj.push(message);
+      clname=local+SECOND;
     }
     //console.log(socket.username+"Socket")
     // Connect to the MongoDB
+    console.log(clname);
     if(SECOND!='')
     {
-      console.log(local+SECOND)
       mongo.connect('mongodb://localhost:27017/chatapp', function (err, db) {
-      var collection = db.collection('message');
-      collection.insert({ content: message, User: name , stamp: time}, function(err, o) {
-          if (err) { console.warn(err.message); }
-            else { console.log("chat message inserted into db: " + message); }
-        });
+      var collection = db.collection(clname);
+      first_obj.forEach((item) => collection.insert(item));
+      // collection.insert({ content: first_obj[0].data, User: first_obj[0].User , stamp: first_obj[0].date}, function(err, o) {
+      //     if (err) { console.warn(err.message); }
+      //       else { console.log("chat message inserted into db: " + message); }
+      //   });
       });
     }
   });
