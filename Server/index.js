@@ -5,7 +5,6 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var mongo = require('mongodb').MongoClient;
 var LocalStorage = require('node-localstorage').LocalStorage;
-var Promise = require("bluebird");
 
 
 
@@ -70,8 +69,6 @@ else
   }
 
 });
-
-
 
 http.listen(port,"0.0.0.0", function(){
   console.log('listening on *:' + port);
