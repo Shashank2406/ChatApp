@@ -1,31 +1,37 @@
-# ChatApp
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
+Peer-to-Peer ChatApp
+## Getting Started
+This repo shows an example chat application using Socket.io, Node and Angular 2
+## Quick start
+```bash
+# clone the repo
+git clone https://github.com/Shashank2406/ChatApp.git
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# change into the repo directory
+cd ChatApp
 
-## Code scaffolding
+# install
+npm install
+npm install -g angular-cli: 1.0.0-beta.28.3
+npm instal node: 7.9.0
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+# run
+npm start
+ng serve
 
-## Build
+```
+Then visit [http://localhost:4200](http://localhost:4200) in your browser.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Running unit tests
+There are mainly three sections of the ChatApp:
+* [`Chatbox`](client/Chatbox-component/Chatbox.component.ts) - for the interaction between different chat-Users/socket connections
+* [`form`](client/form-component/form.component.ts) - to get the details of the user.
+* [`index.js`](server/index.js) - to establish the connection between users using socket.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Deploying to GitHub Pages
-
-Run `ng github-pages:deploy` to deploy to GitHub Pages.
-
-## Further help
-
-To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+###Start Chatting
+Enter your Details to open up a room for a client to join.
+Get the ip address of local Server machine using ipconfig in windows and ifconfig in linux.
+Use the [http://localip:4200](http://localip:4200) url to access the application on local network.
+Enter details to join the hosted chat room.
+Now you can chat.
